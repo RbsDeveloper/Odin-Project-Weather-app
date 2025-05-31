@@ -1,7 +1,7 @@
 import './style.css';
 import { fetchWeather } from './fetch';
 import { getUserPosition } from './location';
-
+import { createUi } from './Ui';
 
 
 const getLoc = async () => {
