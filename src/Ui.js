@@ -1,5 +1,6 @@
 import { createEl } from "./utilities";
 
+
 export const createUi = (() => {
     //main container
 
@@ -12,20 +13,22 @@ export const createUi = (() => {
     const searchinput = createEl('input', ['searchInput'], '', {type: 'search', id: 'searchPlace', placeholder: 'Search for places'});
     searchBox.append(searchinput);
 
-    const currentDayInfo = createEl('div', ['currentDayInfo'], {id: 'currentDayInfo'});
-    const mainImg = createEl('img', ['mainImg'], '', {});
-    const actualTemp = createEl('h1', ['actualTemp'], '' ,{});
+    const currentDayInfo = createEl('div', ['currentDayInfo'],'',{id: 'currentDayInfo'});
+    const mainImg = createEl('div', ['mainImg'], '', {id:'mainImg'});
+    const actualTemp = createEl('h1', ['actualTemp'], '' ,{id: 'actualTemp'});
     const actualDay = createEl('p', ['actualDay'], '', {id: 'actualDay'});
     const actualTime = createEl('span', ['actualTime'], '', {id: 'actualSpan'});
     actualDay.append(actualTime)
     
-    const overallCondition = createEl('p', ['overallCondition'], '', {id: 'overallCondition'});
-    const precipitationCondition = createEl('p', ['precipitationCondition'], '', {id: 'precipitationCondition'}) ;
+    const overallCondition = createEl('p', ['overallCondition'], 'Mostly Cloudy', {id: 'overallCondition'});
+    const precipitationCondition = createEl('p', ['precipitationCondition'], 'Precipitation:', {id: 'precipitationCondition'});
+    const precipitationPercentage = createEl('span', ['rainPercent'], '', {id: 'rainPercent'});
+    precipitationCondition.append(precipitationPercentage);
 
     currentDayInfo.append(mainImg, actualTemp, actualDay, overallCondition, precipitationCondition)
 
     const currentLocationContainer = createEl('div', ['currentLocationContainer'], '', {id: 'currentLocationContainer'});
-    const currentLocation = createEl('p', ['currentLocation'], '', {id: 'currentLocation'});
+    const currentLocation = createEl('p', ['currentLocation'], 'New York, NY, USA', {id: 'currentLocation'});
     currentLocationContainer.append(currentLocation);
 
     leftContainer.append(searchBox, currentDayInfo, currentLocationContainer)
@@ -34,13 +37,13 @@ export const createUi = (() => {
     
     const nav = createEl('div', ['navigation',]);
     const viewToggle = createEl('div', ['viewToggle']);
-    const todayBtn = createEl('button', ['todayBtn'], 'Today', {'data-view':'today', id:'todayBtn'});
-    const weekBtn = createEl('button', ['weekBtn'], 'Week', {'data-view':'week', id:'weekBtn'});
+    const todayBtn = createEl('button', ['dailyBtn', 'active'], 'Daily', {'data-view':'daily', id:'dailyBtn'});
+    const weekBtn = createEl('button', ['weeklyBtn'], 'Weekly', {'data-view':'weekly', id:'weeklyBtn'});
     viewToggle.append(todayBtn, weekBtn);
 
     const temperatureToggle = createEl('div', ['temperatureToggle']);
-    const celsiusUnit = createEl('button', ['celsiusBtn'], '°C', {'data-view':'celsius', id:'celsiusBtn'});
-    const fahrenheitUnit = createEl('button', ['fahrenheitBtn'], '°F', {'data-view': 'fahrenheit', id: 'fahrenheit'});
+    const celsiusUnit = createEl('button', ['celsiusBtn', 'active'], '°C', {'data-view':'celsius', id:'celsiusBtn', 'data-active': true});
+    const fahrenheitUnit = createEl('button', ['fahrenheitBtn'], '°F', {'data-view': 'fahrenheit', id: 'fahrenheit', 'data-active': false});
     temperatureToggle.append(celsiusUnit, fahrenheitUnit);
     nav.append(viewToggle, temperatureToggle);
 
@@ -48,6 +51,7 @@ export const createUi = (() => {
 
     const highlightsContainer = createEl('div', ['highlightsContainer'], '', {id: 'highlightsContainer'});
     const hlTitle = createEl('h3', ['hlTitle'], "Today's Highlights");
+    const cardsContainer = createEl('div', ['cardsContainer'],);
 
     //Uv card
     const uvCard = createEl('div', ['uvCard'], '', {id:'uvCard'});
@@ -83,13 +87,13 @@ export const createUi = (() => {
     const airQualityState = createEl('p', ['airQualityState', 'hhState'], '', {id: 'hhState'});
     airQualityCard.append(airQualityTitle, airQualityValue, airQualityState);
 
-    highlightsContainer.append(hlTitle, uvCard, windCard, ssCard, humidityCard, visibilityCard, airQualityCard);
+    cardsContainer.append(uvCard, windCard, ssCard, humidityCard, visibilityCard, airQualityCard);
+    highlightsContainer.append(hlTitle, cardsContainer)
     rightContainer.append(nav, forecastDisplay, highlightsContainer);
 
 
     main.append(leftContainer, rightContainer);
     document.querySelector('body').append(main)
-
    
 })()
 

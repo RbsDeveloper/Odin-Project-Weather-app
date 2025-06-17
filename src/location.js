@@ -11,6 +11,10 @@ export function getUserPosition() {
                 },
                 ()=> {
                     console.log('Cant get the actual position')
+                    resolve({
+                        latitude: 40.7128,
+                        longitude: -74.0060,
+                    })
                     reject('Geolocation failed');
                 }
             )

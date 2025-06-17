@@ -1,3 +1,190 @@
-body {
-    background-color: green;
+/* 1. Use a more-intuitive box-sizing model */
+*, *::before, *::after {
+  box-sizing: border-box;
 }
+
+/* 2. Remove default margin */
+* {
+  margin: 0;
+}
+
+/* 3. Enable keyword animations */
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    interpolate-size: allow-keywords;
+  }
+}
+
+body {
+  /* 4. Add accessible line-height */
+  line-height: 1.5;
+  /* 5. Improve text rendering */
+  -webkit-font-smoothing: antialiased;
+}
+
+/* 6. Improve media defaults */
+img, picture, video, canvas, svg {
+  display: block;
+  max-width: 100%;
+}
+
+/* 7. Inherit fonts for form controls */
+input, button, textarea, select {
+  font: inherit;
+}
+
+/* 8. Avoid text overflows */
+p, h1, h2, h3, h4, h5, h6 {
+  overflow-wrap: break-word;
+}
+
+/* 9. Improve line wrapping */
+p {
+  text-wrap: pretty;
+}
+h1, h2, h3, h4, h5, h6 {
+  text-wrap: balance;
+}
+
+/*
+  10. Create a root stacking context
+*/
+#root, #__next {
+  isolation: isolate;
+}
+
+body {
+    height: 100vh;
+    background-color: wheat;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.big {
+    display: flex;
+    height: 80vh;
+    width: 85%;
+    max-width: 800px;
+}
+
+.leftContainer {
+    background-color: red;
+    width: 35%;
+    padding: 1em;
+    justify-content: space-evenly;
+    border-radius: 1em 0 0 1em;
+    display: flex;
+    flex-direction: column;
+}
+
+.searchInput {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.mainImg svg{
+    max-width: 150px;
+    margin: 0 auto;
+}
+
+.actualTemp {
+    font-size: 2rem;
+    font-weight: 100;
+}
+
+.currentLocationContainer {
+    align-self: baseline;
+    background-color: azure;
+    border-radius: 1em;
+    padding: 1em;
+    margin: 0 auto;
+}
+
+.rightContainer {
+    background-color: white;
+    width: 65%;
+    border-radius: 0 1em 1em 0;
+    padding: 2em;
+    display: flex;
+    flex-direction: column;
+}
+
+.navigation {
+    display: flex;
+    
+    justify-content: space-between;
+}
+
+.viewToggle {
+    display: flex;
+    gap: 10px;
+}
+
+.viewToggle button {
+    background: transparent;
+    margin: 0;
+    padding: 0;
+    border: none;
+    opacity: .5;
+}
+
+.viewToggle button:hover {
+    cursor: pointer;
+    opacity: 1;
+}
+
+.viewToggle button:active {
+    scale: .9;
+}
+
+.viewToggle button.active {
+    opacity: 1;
+}
+
+.temperatureToggle {
+    display: flex;
+    gap: 10px;
+}
+
+.temperatureToggle button {
+    border: none;
+    border-radius: 50%;
+    background-color: whitesmoke;
+    font-size: .75rem;
+}
+
+.temperatureToggle button:active {
+    scale: .9;
+}
+
+.temperatureToggle button.active {
+    background-color: black;
+    color: white;
+}
+
+.forecastContainer {
+    height: 70px;
+    background-color: goldenrod;
+    margin: 30px 0;
+    
+}
+
+.highlightsContainer {
+    background-color: red;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.cardsContainer {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(125px, 1fr));
+    gap: 1rem
+}
+
+.cardsContainer div {
+    gap: 1rem;
+    background-color: aqua;
+}
+   
