@@ -164,10 +164,11 @@ body {
 }
 
 .forecastContainer {
-    height: 70px;
+    height: 120px;
     background-color: goldenrod;
     margin: 30px 0;
-    
+    display: flex;
+    justify-content: space-evenly;
 }
 
 .highlightsContainer {

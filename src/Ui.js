@@ -28,7 +28,7 @@ export const createUi = (() => {
     currentDayInfo.append(mainImg, actualTemp, actualDay, overallCondition, precipitationCondition)
 
     const currentLocationContainer = createEl('div', ['currentLocationContainer'], '', {id: 'currentLocationContainer'});
-    const currentLocation = createEl('p', ['currentLocation'], 'New York, NY, USA', {id: 'currentLocation'});
+    const currentLocation = createEl('p', ['currentLocation'], '', {id: 'currentLocation'});
     currentLocationContainer.append(currentLocation);
 
     leftContainer.append(searchBox, currentDayInfo, currentLocationContainer)
@@ -56,8 +56,9 @@ export const createUi = (() => {
     //Uv card
     const uvCard = createEl('div', ['uvCard'], '', {id:'uvCard'});
     const uvTitle = createEl('h4', ['hlCardTitle'], 'UV Index');
-    const chart = createEl('div', ['uvChart'], '', {id:'uvChart'});
-    uvCard.append(uvTitle, chart);
+    const uvValue = createEl('p', ['uvVal', 'hhValue'], '', {id: 'uvVal'});
+    const uvState = createEl('p', ['uvState', 'hhState'], '', {id: 'uState'});
+    uvCard.append(uvTitle, uvValue, uvState);
     //Wind status
     const windCard = createEl('div', ['windCard'], '', {id:'windCard'});
     const windTitle = createEl('h4', ['hlCardTitle'], 'Wind Status');
@@ -67,27 +68,29 @@ export const createUi = (() => {
     //Sunrise&Sunset
     const ssCard = createEl('div', ['ssCard'],)
     const ssTitle = createEl('h4', ['hlCardTitle'], 'Sunrise & Sunset');
-    ssCard.append(ssTitle);
+    const srContainer = createEl('div', ['sunMovementContainer'], '', {id:'sunriseContainer'});
+    const ssContainer = createEl('div', ['sunMovementContainer'], '', {id:'sunsetContainer'});
+    ssCard.append(ssTitle, srContainer, ssContainer);
     //Humidity
     const humidityCard = createEl('div', ['humidityCard'], '', {id:'humidityCard'});
     const humidityTitle = createEl('h4', ['hlCardTitle'], 'Humidity');
     const humidityValue = createEl('p', ['humidityVal', 'hhValue'], '', {id: 'humidityVal'});
-    const humidityState = createEl('p', ['humidityState', 'hhState'], '', {id: 'hhState'});
+    const humidityState = createEl('p', ['humidityState', 'hhState'], '', {id: 'hState'});
     humidityCard.append(humidityTitle, humidityValue, humidityState);
     //Visibility
     const visibilityCard = createEl('div', ['visibilityCard'], '', {id:'visibilityCard'});
     const visibilityTitle = createEl('h4', ['hlCardTitle'], 'Visibility');
     const visibilityValue = createEl('p', ['visibilityVal', 'hhValue'], '', {id: 'visibilityVal'});
-    const visibilityState = createEl('p', ['visibilityState', 'hhState'], '', {id: 'hhState'});
+    const visibilityState = createEl('p', ['visibilityState', 'hhState'], '', {id: 'vState'});
     visibilityCard.append(visibilityTitle, visibilityValue, visibilityState);
     //Air Quality
-    const airQualityCard = createEl('div', ['airQualityCard'], '', {id:'airQualityCard'});
-    const airQualityTitle = createEl('h4', ['hlCardTitle'], 'Air Quality');
-    const airQualityValue = createEl('p', ['airQualityVal', 'hhValue'], '', {id: 'airQualityVal'});
-    const airQualityState = createEl('p', ['airQualityState', 'hhState'], '', {id: 'hhState'});
-    airQualityCard.append(airQualityTitle, airQualityValue, airQualityState);
+    const pressureCard = createEl('div', ['pressureCard'], '', {id:'pressureCard'});
+    const pressureTitle = createEl('h4', ['hlCardTitle'], 'Pressure');
+    const pressureValue = createEl('p', ['pressureVal', 'hhValue'], '', {id: 'pressureVal'});
+    const pressureState = createEl('p', ['pressureState', 'hhState'], '', {id: 'pState'});
+    pressureCard.append(pressureTitle, pressureValue, pressureState);
 
-    cardsContainer.append(uvCard, windCard, ssCard, humidityCard, visibilityCard, airQualityCard);
+    cardsContainer.append(uvCard, windCard, ssCard, humidityCard, visibilityCard, pressureCard);
     highlightsContainer.append(hlTitle, cardsContainer)
     rightContainer.append(nav, forecastDisplay, highlightsContainer);
 

@@ -15,11 +15,15 @@ export function getUserPosition() {
                         latitude: 40.7128,
                         longitude: -74.0060,
                     })
-                    reject('Geolocation failed');
+                    //reject('Geolocation failed');
                 }
             )
         }else{
-            reject('Geolocation not supported');
+            //reject('Geolocation not supported');
+            resolve({
+                latitude: 40.7128,
+                longitude: -74.0060,
+            })
         }
     })
 }

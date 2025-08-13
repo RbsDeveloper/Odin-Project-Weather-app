@@ -20,7 +20,8 @@ module.exports = {
     }),
     new CopyPlugin({
       patterns: [
-        { from: path.resolve(__dirname, 'assets/animations'), to: 'animations' }
+        { from: path.resolve(__dirname, 'assets/animations'), to: 'animations' },
+        { from: path.resolve(__dirname, 'assets/icons'), to: 'icons' }
       ],
     }),
   ],

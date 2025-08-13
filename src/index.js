@@ -1,19 +1,22 @@
 import './style.css';
-import { fetchWeather, getForecast, mainFetchWeather } from './fetch';
+import { fetchWeather, mainFetchWeather, obtainCity } from './fetch';
 import { getUserPosition } from './location';
 import { createUi } from './Ui';
 
-import { leftSideModifier, insertAnimation } from './domManipulation';
-import { convertToDate } from './utilities';
-import { setUpButtonListeners } from './events';
+import { leftSideModifier, insertAnimation, createWeeeklyCard, createDailyCard,fulfillHighlightsSection } from './domManipulation';
+import { convertToDate} from './utilities';
+import { setUpButtonListeners, setUpSearchField } from './events';
+import { getCurrentAppState, getMeasureUnit } from './states';
 
 const getLoc = async () => {
     try {
         let zone = await getUserPosition();
-        let data = await fetchWeather(zone);
+        let data = await fetchWeather(zone, `${getCurrentAppState().measureUnit}`);
         leftSideModifier(data);
-        insertAnimation(data);
-        console.log(data)
+        //insertAnimation(data);
+        createDailyCard(data)
+        fulfillHighlightsSection(data)
+       // console.log(data)
     } catch (err) {
         console.error("Error getting location", err);
     }
@@ -21,29 +24,10 @@ const getLoc = async () => {
 
 window.addEventListener('DOMContentLoaded', ()=>{
     getLoc()
+    
 })
 
 
-
-
-
-
-const searchBar = document.getElementById('searchPlace');
-
-searchBar.addEventListener('search', async(e)=> {
-
-    let place = null;
-    
-    if(e.target.value){
-        place = e.target.value;
-        const data = await mainFetchWeather(place, 'metric');
-        console.log(data)
-    }else {
-        console.log('No Values to seach for');
-        return
-    }
-});
-
 setUpButtonListeners()
-
+setUpSearchField()
 
