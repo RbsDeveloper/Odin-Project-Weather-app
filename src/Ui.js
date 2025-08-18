@@ -94,8 +94,10 @@ export const createUi = (() => {
     highlightsContainer.append(hlTitle, cardsContainer)
     rightContainer.append(nav, forecastDisplay, highlightsContainer);
 
+    const loaderContainer = createEl('div', ['loader'], '', {id: 'loader-animation'})
 
-    main.append(leftContainer, rightContainer);
+
+    main.append(leftContainer, rightContainer, loaderContainer);
     document.querySelector('body').append(main)
    
 })()

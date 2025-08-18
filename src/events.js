@@ -1,4 +1,4 @@
- import { toggleStatus, refetchBasedOnMeasureUnits, createDailyCard, createWeeeklyCard, fulfillHighlightsSection, leftSideModifier, insertCurrentTemp } from "./domManipulation";
+ import { toggleStatus, refetchBasedOnMeasureUnits, createDailyCard, createWeeeklyCard, fulfillHighlightsSection, leftSideModifier, insertCurrentTemp, showLoader } from "./domManipulation";
  import { mainFetchWeather } from "./fetch";
  import { setMeasureUnit, setTimeForecast, getCurrentAppState} from "./states";
 
@@ -76,8 +76,10 @@ export function setUpSearchField () {
             fulfillHighlightsSection(data)
         }
     }else {
-        console.log('No Values to seach for');
+        console.log('No Values to search for');
         return
     }
+
+
 });
 }

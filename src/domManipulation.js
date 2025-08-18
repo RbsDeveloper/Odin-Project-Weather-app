@@ -12,7 +12,8 @@ export const insertCurrentTemp = (forecast) => {
 
 export const leftSideModifier = async (obj) =>{
 
-    let appropriateIcon = getIcon(obj.currentConditions.icon);
+    setTimeout(async ()=> {
+        let appropriateIcon = getIcon(obj.currentConditions.icon);
     insertAnimation(`${appropriateIcon}`, 'mainImg')
     /*
     const temp = document.getElementById('actualTemp');
@@ -34,6 +35,9 @@ export const leftSideModifier = async (obj) =>{
     const cityData = await obtainCity(obj);
     location.innerText = '';
     location.innerText = `${cityData.city}, ${cityData.countryCode}`
+    }, 1000)
+
+    
 } 
 
 export const toggleStatus = (eTarget) => {
@@ -75,7 +79,8 @@ export const createWeeeklyCard = (forecastData) =>{
     const usableData = forecastData.days.slice(0, 7);
     let iconPath
 
-    for(let i=0; i< usableData.length; i++){
+    setTimeout(()=>{
+        for(let i=0; i< usableData.length; i++){
         const card = createEl('div', ['dayCard', 'forecastCard'], '', {id: `dayCard${i}`});
         const day = createEl('p', ['cardTitle'], `${format(new Date(forecastData.days[i].datetime), 'E')}`,);
         const cardIcon = createEl('div', ['weatherIcon'], '', {id: `cardIcon${i}`});
@@ -89,7 +94,10 @@ export const createWeeeklyCard = (forecastData) =>{
 
         iconPath = getIcon(usableData[i].icon);
         insertAnimation(`${iconPath}`, `cardIcon${i}`)
-    }
+        }
+    }, 1000)
+
+    
 };
 
 export const createDailyCard = (forecastData) => {
@@ -101,7 +109,8 @@ export const createDailyCard = (forecastData) => {
 
     let iconPath
 
-    usableData.forEach((day, index) => {
+    setTimeout(()=> {
+        usableData.forEach((day, index) => {
         const card = createEl('div', ['dayCard', 'forecastCard'], '', {id: `dayCard${index}`});
 
         const hourFormatted = formatToTwelveHour(day.datetime)
@@ -118,6 +127,9 @@ export const createDailyCard = (forecastData) => {
         insertAnimation(`${iconPath}`, `cardIcon${index}`)
         
     })
+    }, 1000)
+
+    
 
 }
 
@@ -224,12 +236,15 @@ export const createDailyCard = (forecastData) => {
 }
 
 export const fulfillHighlightsSection = (forecastData) => {
-    injectUvData(forecastData);
-    injectWindData(forecastData);
-    injectSunMovement(forecastData);
-    injectHumidityData(forecastData);
-    injectVisibilityData(forecastData);
-    injectpressureData(forecastData)
+    setTimeout(()=> {
+        injectUvData(forecastData);
+        injectWindData(forecastData);
+        injectSunMovement(forecastData);
+        injectHumidityData(forecastData);
+        injectVisibilityData(forecastData);
+        injectpressureData(forecastData)
+    }, 1000)
+    
 };
 
 export const refetchBasedOnMeasureUnits = async () => {
@@ -243,5 +258,28 @@ export const refetchBasedOnMeasureUnits = async () => {
     console.log('from refetch:', data, );
 
     return data
-
 };
+
+let loaderStartTime; 
+
+export const showLoader = () => {
+    const animation = document.getElementById('loader-animation');
+    loaderStartTime = Date.now()
+    if(animation.classList.contains('loader-hidden')){
+        animation.classList.remove('loader-hidden');
+    }
+}
+
+export const hideLoader = () => {   
+    const animation = document.getElementById('loader-animation');
+    const elapsedTime = Date.now() - loaderStartTime;
+    if(elapsedTime >= 2000) {
+        animation.classList.add('loader-hidden');
+    }else{
+        const timeLeft = 2000 - elapsedTime;
+
+        setTimeout(()=>{
+            animation.classList.add('loader-hidden')
+        }, timeLeft)
+    }
+}
