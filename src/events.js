@@ -10,6 +10,7 @@ export function setUpButtonListeners () {
     viewToggleContainer.addEventListener('click', async (e)=> {
         toggleStatus(e)
         setTimeForecast(e)
+        
         const info = await refetchBasedOnMeasureUnits();
         
         const appState = getCurrentAppState();
@@ -55,12 +56,13 @@ export function setUpButtonListeners () {
 
 export function setUpSearchField () {
     const searchBar = document.getElementById('searchPlace');
-
-    searchBar.addEventListener('search', async(e)=> {
+    const form = document.getElementById('searchForm');
+/*
+    searchBar.addEventListener('keydown', async(e)=> {
 
     //let place = null;
     
-    if(e.target.value){
+    if(e.key==='Enter'){
         //place = e.target.value;
         const measureUnit = getCurrentAppState().measureUnit;
         const data = await mainFetchWeather(`${e.target.value}`, `${measureUnit}`);
@@ -82,4 +84,28 @@ export function setUpSearchField () {
 
 
 });
+*/
+ form.addEventListener('submit', async(e)=> {
+    e.preventDefault()
+    let inputVal = searchBar.value
+
+    if(inputVal){
+        const measureUnit = getCurrentAppState().measureUnit;
+        const data = await mainFetchWeather(`${inputVal}`, `${measureUnit}`);
+        searchBar.value = '';
+        console.log(getCurrentAppState().forecastData)
+        if(getCurrentAppState().timeForecast === 'daily'){
+            leftSideModifier(data)
+            createDailyCard(data)
+            fulfillHighlightsSection(data)
+        }else{
+            leftSideModifier(data)
+            createWeeeklyCard(data)
+            fulfillHighlightsSection(data)
+        }
+    }else{
+        console.log('No Values to search for');
+        return
+    }
+ })
 }

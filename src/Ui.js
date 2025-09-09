@@ -10,8 +10,13 @@ export const createUi = (() => {
 
     //Search item
     const searchBox = createEl('div', ['searchBox'], '', {id: 'searchBox'});
-    const searchinput = createEl('input', ['searchInput'], '', {type: 'search', id: 'searchPlace', placeholder: 'Search for places'});
-    searchBox.append(searchinput);
+    const form = createEl('form', [], '', {id: 'searchForm'})
+    const searchIcon = createEl('i', ['fa-solid', 'fa-magnifying-glass'])
+    const searchBtn = createEl('button', ['searchBtn'], '', {type: 'submit'});
+    const searchinput = createEl('input', ['searchInput'], '', {type: 'text', id: 'searchPlace', placeholder: 'Search...'});
+    searchBtn.append(searchIcon)
+    form.append(searchinput, searchBtn)
+    searchBox.append(form);
 
     const currentDayInfo = createEl('div', ['currentDayInfo'],'',{id: 'currentDayInfo'});
     const mainImg = createEl('div', ['mainImg'], '', {id:'mainImg'});
@@ -63,7 +68,7 @@ export const createUi = (() => {
     const windCard = createEl('div', ['windCard'], '', {id:'windCard'});
     const windTitle = createEl('h4', ['hlCardTitle'], 'Wind Status');
     const windValue = createEl('p', ['windVal', 'hhValue'], '', {id: 'windVal'});
-    const direction = createEl('p', ['windDirection'], '', {id: 'windDirection'});
+    const direction = createEl('p', ['windDirection', 'hhState'], '', {id: 'windDirection'});
     windCard.append(windTitle, windValue, direction);
     //Sunrise&Sunset
     const ssCard = createEl('div', ['ssCard'],)

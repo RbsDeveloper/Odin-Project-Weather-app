@@ -251,6 +251,7 @@ export const refetchBasedOnMeasureUnits = async () => {
     let unit = getCurrentAppState().measureUnit;
     
     const coordinates = getCurrentAppState().forecastData;
+    
     const place = await obtainCity(coordinates);
 
     let data = await mainFetchWeather(place.city, unit); //here is a change
