@@ -8,8 +8,12 @@ export function setUpButtonListeners () {
     const tempToggleContainer = document.querySelector('.temperatureToggle');
 
     viewToggleContainer.addEventListener('click', async (e)=> {
-        toggleStatus(e)
-        setTimeForecast(e)
+        const statusChanged = toggleStatus(e)
+        const forecastChanged = setTimeForecast(e)
+
+        if(statusChanged === false && forecastChanged === false){
+            return
+        }
         
         const info = await refetchBasedOnMeasureUnits();
         
@@ -26,7 +30,11 @@ export function setUpButtonListeners () {
     });
 
     tempToggleContainer.addEventListener('click', async (e)=> {
-        toggleStatus(e)
+        const statusChanged = toggleStatus(e)
+
+        if(statusChanged === false){
+            return
+        }
         
         if(e.target.dataset.view === 'celsius'){
             setMeasureUnit('metric');

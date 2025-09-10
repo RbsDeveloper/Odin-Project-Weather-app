@@ -45,12 +45,13 @@ export const toggleStatus = (eTarget) => {
     
         if(eTarget.target.classList.contains('active')){
             console.log('nothing to change here');
-            return
+            return false
         }else{
             childrenList.forEach((children)=> {
                 children.classList.remove('active');
             });
             eTarget.target.classList.add('active');
+            return true
         }
     //console.log(eTarget.target.classList)
     //console.log(childrenList)
