@@ -1,11 +1,14 @@
- import { toggleStatus, refetchBasedOnMeasureUnits, createDailyCard, createWeeeklyCard, fulfillHighlightsSection, leftSideModifier, insertCurrentTemp, showLoader } from "./domManipulation";
- import { mainFetchWeather } from "./fetch";
+ import { toggleStatus, createDailyCard, createWeeeklyCard, fulfillHighlightsSection, leftSideModifier, insertCurrentTemp, hideModal } from "./domManipulation";
+ import { mainFetchWeather, refetchBasedOnMeasureUnits } from "./fetch";
  import { setMeasureUnit, setTimeForecast, getCurrentAppState} from "./states";
+ import { createUi } from "./Ui";
+ import { loadInitialWeather } from "./startUp";
 
 
 export function setUpButtonListeners () {
     const viewToggleContainer = document.querySelector('.viewToggle');
     const tempToggleContainer = document.querySelector('.temperatureToggle');
+    const modalBtn = document.getElementById('closeModalBtn');
 
     viewToggleContainer.addEventListener('click', async (e)=> {
         const statusChanged = toggleStatus(e)
@@ -57,8 +60,10 @@ export function setUpButtonListeners () {
             createWeeeklyCard(info);
             console.log(info)
         }
+    })
 
-        
+    modalBtn.addEventListener('click', ()=> {
+        hideModal()
     })
 }
 
@@ -116,4 +121,14 @@ export function setUpSearchField () {
         return
     }
  })
+}
+
+export function startApp () {
+    window.addEventListener('DOMContentLoaded', async()=>{
+    createUi()
+    await loadInitialWeather()
+    
+    setUpButtonListeners()
+    setUpSearchField()
+})
 }

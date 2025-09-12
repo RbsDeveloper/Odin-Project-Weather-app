@@ -5,12 +5,20 @@ import { getForecast, mainFetchWeather, obtainCity } from "./fetch";
 import { getCurrentAppState, getMeasureUnit } from "./states";
 
 export const insertCurrentTemp = (forecast) => {
+    if(!forecast){
+        return
+    }
+
     const temp = document.getElementById('actualTemp');
     temp.innerHTML = '';
     temp.textContent = forecast.currentConditions.temp + `${obtainUnit()}`
 }
 
 export const leftSideModifier = async (obj) =>{
+
+    if(!obj) {
+        return
+    }
 
     setTimeout(async ()=> {
         let appropriateIcon = getIcon(obj.currentConditions.icon);
@@ -75,6 +83,10 @@ export const insertAnimation = (iconName, containerId) => {
 }
 
 export const createWeeeklyCard = (forecastData) =>{
+    if(!forecastData){
+        return
+    }
+
     const forecastContainer = document.getElementById('forecastDisplay');
     forecastContainer.innerHTML = '';
     const usableData = forecastData.days.slice(0, 7);
@@ -102,6 +114,10 @@ export const createWeeeklyCard = (forecastData) =>{
 };
 
 export const createDailyCard = (forecastData) => {
+    if(!forecastData){
+        return
+    }
+
     const forecastContainer = document.getElementById('forecastDisplay');
     forecastContainer.innerHTML = '';
     
@@ -237,6 +253,10 @@ export const createDailyCard = (forecastData) => {
 }
 
 export const fulfillHighlightsSection = (forecastData) => {
+    if(!forecastData){
+        return
+    }
+
     setTimeout(()=> {
         injectUvData(forecastData);
         injectWindData(forecastData);
@@ -247,7 +267,7 @@ export const fulfillHighlightsSection = (forecastData) => {
     }, 1000)
     
 };
-
+/*
 export const refetchBasedOnMeasureUnits = async () => {
     let unit = getCurrentAppState().measureUnit;
     
@@ -260,7 +280,7 @@ export const refetchBasedOnMeasureUnits = async () => {
     console.log('from refetch:', data, );
 
     return data
-};
+};*/
 
 let loaderStartTime; 
 
@@ -284,4 +304,17 @@ export const hideLoader = () => {
             animation.classList.add('loader-hidden')
         }, timeLeft)
     }
+}
+
+export const showModal = (message) => {
+    const modal = document.getElementById('errorModal');
+    const modalError = document.getElementById('errorMsg');
+
+    modalError.innerText = `${message}`;
+    modal.classList.remove('hidden');
+}
+
+export const hideModal = () => {
+    const modal = document.getElementById('errorModal');
+    modal.classList.add('hidden');
 }

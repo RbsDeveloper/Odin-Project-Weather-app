@@ -67,6 +67,7 @@ body {
 
 .big {
     display: flex;
+    position: relative;
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
     border-radius: 1em;
     height: 80vh;
@@ -305,6 +306,26 @@ input[type=search] {
   border-top-color: #7449f5;
   border-radius: 50%;
   animation: loading 0.75s ease-in infinite;
+}
+
+/*Error modal*/
+
+.errorModal {
+  background-color: #7449f5;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateY(-50%) translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 350px;
+  height: 125px;
+  border-radius: 1em;
+}
+
+.hidden {
+  display: none;
 }
 
 @keyframes loading {

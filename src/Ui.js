@@ -1,7 +1,7 @@
 import { createEl } from "./utilities";
 
 
-export const createUi = (() => {
+export const createUi = () => {
     //main container
 
     const main = createEl('main', ['big'])
@@ -101,10 +101,17 @@ export const createUi = (() => {
 
     const loaderContainer = createEl('div', ['loader'], '', {id: 'loader-animation'})
 
+    //error modal
 
-    main.append(leftContainer, rightContainer, loaderContainer);
+    const modal = createEl('dialog', ['errorModal', 'hidden'], '', {id: 'errorModal'});
+    const msgSection = createEl('p', ['msg'], 'hi', {id: 'errorMsg'});
+    const closeModalBtn = createEl('button', ['closeModalBtn'], 'Close', {id:'closeModalBtn'});
+
+    modal.append(msgSection, closeModalBtn);
+
+    main.append(leftContainer, rightContainer, loaderContainer, modal);
     document.querySelector('body').append(main)
    
-})()
+}
 
  

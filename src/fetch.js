@@ -1,6 +1,6 @@
-import { hideLoader, showLoader } from "./domManipulation";
+import { hideLoader, showLoader, showModal } from "./domManipulation";
 import { setCurrentForecast } from "./states";
-
+import { getCurrentAppState } from "./states";
 
 const KEY = 'KUZ7CPU5YFXU6BTGMPZAWAWNR';
 
@@ -10,11 +10,17 @@ export const fetchWeather = async(location, unit)=> {
         showLoader()
         const result = await fetch(`https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${location.latitude},${location.longitude}?unitGroup=${unit}&key=${KEY}`);
         const data = await result.json();
+
+        if (!data) {
+            showModal("Service unavailable, try again later.");
+            return;
+        }
         //forecastData = data;
         setCurrentForecast(data);
         return data;
     }catch (err){
         console.error('Could not fetch the weather', err)
+        showModal('network error')
         return null
     }finally{
         hideLoader()
@@ -42,13 +48,38 @@ export const mainFetchWeather = async(city, unit)=> {
         const result = await fetch(`https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${city}?unitGroup=${unit}&key=${KEY}`);
         const data = await result.json();
 
+        if(!data || !data.days || data.days.length === 0){
+            showModal('Could not retrieve weather data for this location. Please check the city name and try again.');
+            return null;
+        }
+
         setCurrentForecast(data);
         return data
     }catch (err){
-        console.error('Could not fetch the data for the forecast of the city where the user currently is:', err)
+        console.error('Could not fetch the data:', err)
+        showModal('Unable to reach the weather service. Please check your connection or try again later.')
     }finally{
         hideLoader()
     }
 }
 
-//try catch to be added, design to be done, loader animation between fetch
+export const refetchBasedOnMeasureUnits = async () => {
+    try{ 
+        
+    let unit = getCurrentAppState().measureUnit;
+    
+    const coordinates = getCurrentAppState().forecastData;
+    
+    const place = await obtainCity(coordinates);
+
+    let data = await mainFetchWeather(place.city, unit); 
+
+    console.log('from refetch:', data, );
+
+    return data
+    }catch (err){
+        console.error('Could not obtain data from the state', err)
+    }
+   
+};
+

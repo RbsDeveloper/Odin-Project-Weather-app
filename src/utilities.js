@@ -89,6 +89,10 @@ export const renderForecast = (forecast) => {
 }*/
 
 export const extractForecastHours = (externalData) => {
+    if(!externalData) {
+        return
+    }
+
     const totalHours = externalData.days[0].hours.length;
     
     const currentTime = parseInt(convertToHour(externalData, externalData.timezone).slice(0,2), 10);
