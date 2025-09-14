@@ -131,6 +131,10 @@ input[type=search] {
   letter-spacing: 1px;
 }
 */
+.currentDayInfo {
+  font-size: .75rem;
+}
+
 .mainImg svg{
     max-width: 150px;
     margin: 0 auto;
@@ -141,12 +145,30 @@ input[type=search] {
     font-weight: 100;
 }
 
+.dayInfoContainer {
+  display: flex;
+}
+
+.actualTime {
+  color: #6B7280;
+}
+
 .currentLocationContainer {
     align-self: baseline;
-    background-color: azure;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: auto;
+    min-height: 15%;
+    color: #fff;
+    background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('../assets/images/pexels-pixabay-302769.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: bottom;
     border-radius: 1em;
     padding: 1em;
     margin: 0 auto;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
 }
 
 .rightContainer {
@@ -157,9 +179,12 @@ input[type=search] {
 }
 
 .navigation {
-    display: flex;
-    
+    display: flex; 
     justify-content: space-between;
+}
+
+button {
+  transition: transform 0.5s, background-color 0.5s, border-color 0.5s, color 2.5s, opacity 0.5s;
 }
 
 .viewToggle {
@@ -181,7 +206,7 @@ input[type=search] {
 }
 
 .viewToggle button:active {
-    scale: .9;
+    transform: scale(.9);
 }
 
 .viewToggle button.active {
@@ -189,8 +214,8 @@ input[type=search] {
 }
 
 .temperatureToggle {
-    display: flex;
-    gap: 10px;
+  display: flex;
+  gap: 10px;
 }
 
 .temperatureToggle button {
@@ -198,14 +223,21 @@ input[type=search] {
     border-radius: 50%;
     background-color: whitesmoke;
     font-size: .75rem;
+    width: 25px;
+    height: 25px;
 }
 
 .temperatureToggle button:active {
-    scale: .9;
+    transform: scale(.9);
+}
+
+.temperatureToggle button:hover {
+  border: 1px solid #5c32c8;
+  color: #5c32c8;
 }
 
 .temperatureToggle button.active {
-    background-color: black;
+    background-color: #7449f5;
     color: white;
 }
 
@@ -227,9 +259,10 @@ input[type=search] {
   flex-direction: column;
   min-width: 60px;
   flex: 1;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
 }
 
-.cardTitle, .currentTemp {
+.cardTitle, .currentTemp, .dayTemp {
   font-size: .675em;
 }
 
@@ -269,6 +302,17 @@ input[type=search] {
     justify-content: space-between;
     box-shadow: 0 1px 3px rgba(0,0,0,0.1);
     min-height: 120px;
+}
+
+.sunMovementContainer {
+  display: flex;
+  align-items: center;
+}
+
+.sunriseImg, .sunsetImg {
+  width: 1em;
+  height: 1em;
+  margin-right: .5em;
 }
 
 .hlCardTitle {

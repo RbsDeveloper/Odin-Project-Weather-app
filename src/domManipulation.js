@@ -30,14 +30,16 @@ export const leftSideModifier = async (obj) =>{
 
     insertCurrentTemp(obj)
 
-    const time = document.getElementById('actualDay');
-    time.textContent = convertToDate(obj) + ', ' + convertToHour(obj, obj.timezone);
+    const day = document.getElementById('actualDay');
+    day.textContent = convertToDate(obj) + ',';
+    const time = document.getElementById('actualTime');
+    time.textContent = convertToHour(obj, obj.timezone);
 
     const currentCondition = document.getElementById('overallCondition');
     currentCondition.textContent = obj.currentConditions.conditions
 
     const rainPercent = document.getElementById('rainPercent');
-    rainPercent.textContent = obj.currentConditions.precipprob+'%'
+    rainPercent.textContent =' ' +  obj.currentConditions.precipprob+'%'
 
     const location = document.getElementById('currentLocation');
     const cityData = await obtainCity(obj);
@@ -86,13 +88,13 @@ export const createWeeeklyCard = (forecastData) =>{
     if(!forecastData){
         return
     }
-
+setTimeout(()=>{
     const forecastContainer = document.getElementById('forecastDisplay');
     forecastContainer.innerHTML = '';
     const usableData = forecastData.days.slice(0, 7);
     let iconPath
 
-    setTimeout(()=>{
+    
         for(let i=0; i< usableData.length; i++){
         const card = createEl('div', ['dayCard', 'forecastCard'], '', {id: `dayCard${i}`});
         const day = createEl('p', ['cardTitle'], `${format(new Date(forecastData.days[i].datetime), 'E')}`,);
@@ -117,7 +119,7 @@ export const createDailyCard = (forecastData) => {
     if(!forecastData){
         return
     }
-
+setTimeout(()=> {
     const forecastContainer = document.getElementById('forecastDisplay');
     forecastContainer.innerHTML = '';
     
@@ -126,7 +128,7 @@ export const createDailyCard = (forecastData) => {
 
     let iconPath
 
-    setTimeout(()=> {
+    
         usableData.forEach((day, index) => {
         const card = createEl('div', ['dayCard', 'forecastCard'], '', {id: `dayCard${index}`});
 
@@ -158,15 +160,15 @@ export const createDailyCard = (forecastData) => {
     uvVal.innerText = `${uvValue}`;
 
     if(uvValue >= 0 && uvValue <= 2){
-        uvState.innerText = 'Low';
+        uvState.innerText = '😎 Low';
     }else if(uvValue >= 3 && uvValue <= 5){
-        uvState.innerText = 'Moderate';
+        uvState.innerText = '🌤️ Moderate';
     }else if(uvValue >= 6 && uvValue <= 7){
-        uvState.innerText = 'High';
+        uvState.innerText = '☀️ High';
     }else if(uvValue >= 8 && uvValue <= 10){
-        uvState.innerText = 'Very High';
+        uvState.innerText = '🔥 Very High';
     }else {
-        uvState.innerText = 'Extreme';
+        uvState.innerText = '☢️ Extreme';
     }
 }
 
@@ -178,11 +180,11 @@ export const createDailyCard = (forecastData) => {
     percentage.innerText = humVal;
 
     if(humVal <= 30){
-        hStatus.innerText = 'Low';
+        hStatus.innerText = '🔥 Low ';
     }else if(humVal > 30 && humVal <= 60){
-        hStatus.innerText = 'Medium';
+        hStatus.innerText = '💧 Medium';
     }else {
-        hStatus.innerText = 'High';
+        hStatus.innerText = '💦 High';
     }
 }
 
@@ -194,15 +196,15 @@ export const createDailyCard = (forecastData) => {
     visibiliTyVal.innerText = `${visValue} km`;
 
     if(visValue > 0 && visValue <= 1){
-        vStatus.innerText = 'Very Poor';
+        vStatus.innerText = '🌫️ Very Poor';
     }else if(visValue > 1 && visValue <= 4){
-        vStatus.innerText = 'Poor';
+        vStatus.innerText = '👓 Poor';
     }else if(visValue > 4 && visValue <= 10){
-        vStatus.innerText = 'Moderate';
+        vStatus.innerText = '👁️ Moderate';
     }else if(visValue > 10 && visValue <= 20){
-        vStatus.innerText = 'Good';
+        vStatus.innerText = '👀 Good';
     }else {
-        vStatus.innerText = 'Excellent';
+        vStatus.innerText = '🔭 Excellent';
     }
 }
 
@@ -214,11 +216,11 @@ export const createDailyCard = (forecastData) => {
     pressureVal.innerText = `${pressureValue} hPa`
 
     if(pressureValue > 1020){
-        pressureStatus.innerText = 'High';
+        pressureStatus.innerText = '☀️ High';
     }else if(pressureValue>= 1000 && pressureValue <= 1020){
-        pressureStatus.innerText = 'Normal';
+        pressureStatus.innerText = '🌤️ Normal';
     }else {
-        pressureStatus.innerText = 'Low';
+        pressureStatus.innerText = '☁️ Low';
     }
 
 }
@@ -230,7 +232,7 @@ export const createDailyCard = (forecastData) => {
 
     windVal.innerText = `${windValue} km/h`;
 
-    windStatus.innerText = `${getWindDirection(forecastData.currentConditions.winddir)}`
+    windStatus.innerText = `🧭 ${getWindDirection(forecastData.currentConditions.winddir)}`
 }
 
     const injectSunMovement = (forecastData) => {
@@ -242,12 +244,14 @@ export const createDailyCard = (forecastData) => {
     sunRiseContainer.innerText = '';
     sunSetContainer.innerText = '';
 
-    const sunRiseImg = createEl('img', ['sunriseImg'], '');
+    const sunRiseImg = createEl('img', ['sunriseImg'], '',);
+    sunRiseImg.src = require('../assets/icons/sunrise.png')
     const sunRiseTime = createEl('p', ['sunriseTime'], `${formatToTwelveHour(srInfo)}`)
     sunRiseContainer.append(sunRiseImg, sunRiseTime);
 
     
-    const sunSetImg = createEl('img', ['sunsetImg'], '');
+    const sunSetImg = createEl('img', ['sunsetImg'], '',);
+    sunSetImg.src = require('../assets/icons/sunset.png')
     const sunSetTime = createEl('p', ['sunsetTime'], `${formatToTwelveHour(ssInfo)}`)
     sunSetContainer.append(sunSetImg, sunSetTime);
 }

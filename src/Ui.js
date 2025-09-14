@@ -21,16 +21,17 @@ export const createUi = () => {
     const currentDayInfo = createEl('div', ['currentDayInfo'],'',{id: 'currentDayInfo'});
     const mainImg = createEl('div', ['mainImg'], '', {id:'mainImg'});
     const actualTemp = createEl('h1', ['actualTemp'], '' ,{id: 'actualTemp'});
+    const dayInfo = createEl('div', ['dayInfoContainer'], '', {id:'dayInfoContainer'})
     const actualDay = createEl('p', ['actualDay'], '', {id: 'actualDay'});
-    const actualTime = createEl('span', ['actualTime'], '', {id: 'actualSpan'});
-    actualDay.append(actualTime)
+    const actualTime = createEl('span', ['actualTime'], '', {id: 'actualTime'});
+    dayInfo.append(actualDay, actualTime)
     
     const overallCondition = createEl('p', ['overallCondition'], 'Mostly Cloudy', {id: 'overallCondition'});
     const precipitationCondition = createEl('p', ['precipitationCondition'], 'Precipitation:', {id: 'precipitationCondition'});
     const precipitationPercentage = createEl('span', ['rainPercent'], '', {id: 'rainPercent'});
     precipitationCondition.append(precipitationPercentage);
 
-    currentDayInfo.append(mainImg, actualTemp, actualDay, overallCondition, precipitationCondition)
+    currentDayInfo.append(mainImg, actualTemp, dayInfo, overallCondition, precipitationCondition)
 
     const currentLocationContainer = createEl('div', ['currentLocationContainer'], '', {id: 'currentLocationContainer'});
     const currentLocation = createEl('p', ['currentLocation'], '', {id: 'currentLocation'});
