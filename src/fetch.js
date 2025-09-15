@@ -15,7 +15,7 @@ export const fetchWeather = async(location, unit)=> {
             showModal("Service unavailable, try again later.");
             return;
         }
-        //forecastData = data;
+        
         setCurrentForecast(data);
         return data;
     }catch (err){
@@ -33,8 +33,8 @@ export const obtainCity = async(location) => {
     try{
         const result = await fetch(`https://us1.api-bdc.net/data/reverse-geocode-client?latitude=${location.latitude}&longitude=${location.longitude}&localityLanguage=en`)
         const json = await result.json();
-        console.log(json)
-        return json //here is another one, it was .city
+
+        return json 
     }catch (err){
         console.error('Could not obtain data about the city', err)
         return null
@@ -73,8 +73,6 @@ export const refetchBasedOnMeasureUnits = async () => {
     const place = await obtainCity(coordinates);
 
     let data = await mainFetchWeather(place.city, unit); 
-
-    console.log('from refetch:', data, );
 
     return data
     }catch (err){

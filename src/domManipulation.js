@@ -1,8 +1,8 @@
 import { convertToDate, convertToHour, getIcon, createEl, getWindDirection, extractForecastHours, formatToTwelveHour, obtainUnit } from "./utilities";
-import {format, parse} from 'date-fns';
+import {format} from 'date-fns';
 import Lottie from 'lottie-web';
-import { getForecast, mainFetchWeather, obtainCity } from "./fetch";
-import { getCurrentAppState, getMeasureUnit } from "./states";
+import { obtainCity } from "./fetch";
+
 
 export const insertCurrentTemp = (forecast) => {
     if(!forecast){
@@ -23,10 +23,6 @@ export const leftSideModifier = async (obj) =>{
     setTimeout(async ()=> {
         let appropriateIcon = getIcon(obj.currentConditions.icon);
     insertAnimation(`${appropriateIcon}`, 'mainImg')
-    /*
-    const temp = document.getElementById('actualTemp');
-    temp.textContent = obj.currentConditions.temp + `${obtainUnit()}`;
-    */
 
     insertCurrentTemp(obj)
 
@@ -63,8 +59,6 @@ export const toggleStatus = (eTarget) => {
             eTarget.target.classList.add('active');
             return true
         }
-    //console.log(eTarget.target.classList)
-    //console.log(childrenList)
 }
 
 export const insertAnimation = (iconName, containerId) => {
@@ -84,7 +78,7 @@ export const insertAnimation = (iconName, containerId) => {
 )
 }
 
-export const createWeeeklyCard = (forecastData) =>{
+export const createWeeklyCard = (forecastData) =>{
     if(!forecastData){
         return
     }
@@ -94,8 +88,7 @@ setTimeout(()=>{
     const usableData = forecastData.days.slice(0, 7);
     let iconPath
 
-    
-        for(let i=0; i< usableData.length; i++){
+    for(let i=0; i< usableData.length; i++){
         const card = createEl('div', ['dayCard', 'forecastCard'], '', {id: `dayCard${i}`});
         const day = createEl('p', ['cardTitle'], `${format(new Date(forecastData.days[i].datetime), 'E')}`,);
         const cardIcon = createEl('div', ['weatherIcon'], '', {id: `cardIcon${i}`});
@@ -106,10 +99,11 @@ setTimeout(()=>{
         temperatureContainer.append(maxTemp, minTemp);
         card.append(day, cardIcon, temperatureContainer);
         forecastContainer.append(card);
-
+        
         iconPath = getIcon(usableData[i].icon);
         insertAnimation(`${iconPath}`, `cardIcon${i}`)
         }
+    
     }, 1000)
 
     
@@ -124,7 +118,6 @@ setTimeout(()=> {
     forecastContainer.innerHTML = '';
     
     let usableData = extractForecastHours(forecastData);
-    console.log(usableData)
 
     let iconPath
 
@@ -208,7 +201,7 @@ setTimeout(()=> {
     }
 }
 
-    const injectpressureData = (forecastData) => {
+    const injectPressureData = (forecastData) => {
     const pressureVal = document.getElementById('pressureVal');
     const pressureStatus = document.getElementById('pState');
     const pressureValue = forecastData.currentConditions.pressure;
@@ -267,24 +260,11 @@ export const fulfillHighlightsSection = (forecastData) => {
         injectSunMovement(forecastData);
         injectHumidityData(forecastData);
         injectVisibilityData(forecastData);
-        injectpressureData(forecastData)
+        injectPressureData(forecastData)
     }, 1000)
     
 };
-/*
-export const refetchBasedOnMeasureUnits = async () => {
-    let unit = getCurrentAppState().measureUnit;
-    
-    const coordinates = getCurrentAppState().forecastData;
-    
-    const place = await obtainCity(coordinates);
 
-    let data = await mainFetchWeather(place.city, unit); //here is a change
-
-    console.log('from refetch:', data, );
-
-    return data
-};*/
 
 let loaderStartTime; 
 

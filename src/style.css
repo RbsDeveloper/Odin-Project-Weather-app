@@ -93,14 +93,24 @@ body {
 
 .searchInput {
     width: 100%;
-    border: none;
     outline: none;
 }
 
 input[type=text] {
-  border: 1px solid black;
+  border: 1px solid #D1D5DB;
   border-radius: .5em;
   padding-right: 40px;
+  font-size: 1rem;
+}
+
+.searchInput:hover {
+  border-color: #9CA3AF;
+}
+
+.searchInput:focus {
+  outline: none;
+  border-color: #7C3AED;
+  box-shadow: 0 0 0 2px rgba(124, 58, 237, 0.2);
 }
 
 .searchBtn {
@@ -112,25 +122,12 @@ input[type=text] {
   cursor: pointer;
   position: absolute;
   right: 0px;
-  
-}
-  /*
-.searchBox i {
-  color: #333;
-  width: 20%;
-  margin-left: 10px;
-  position: absolute;
 }
 
-
-
-input[type=search] {
-  border-radius: 4em;
-  border: 2px solid black;
-  cursor: pointer;
-  letter-spacing: 1px;
+.searchBtn i {
+  color: #fff;
 }
-*/
+
 .currentDayInfo {
   font-size: .75rem;
 }
@@ -234,6 +231,7 @@ button {
 .temperatureToggle button:hover {
   border: 1px solid #5c32c8;
   color: #5c32c8;
+  cursor: pointer;
 }
 
 .temperatureToggle button.active {

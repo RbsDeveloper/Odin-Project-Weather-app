@@ -8,7 +8,6 @@ export const setMeasureUnit = (unit) => {
 
 export const setTimeForecast = (e) => {
     if(timeForecast === e.target.dataset.view){
-        console.log('the same')
         return false
     }else{
         timeForecast = e.target.dataset.view

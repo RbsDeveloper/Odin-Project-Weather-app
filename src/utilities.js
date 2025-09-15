@@ -29,10 +29,7 @@ export const convertToHour = (obj, timezone) => {
     
 
     const zonedDate = toZonedTime(currentday, timezone)
-    console.log(zonedDate)
-    console.log(timezone)
-    //console.log(currentday, 'from convert to hour')
-    console.log(format(zonedDate, 'HH:mm'))
+    
     return format(zonedDate, 'HH:mm');
 }
 
@@ -67,27 +64,6 @@ export const getIcon = (condition) => {
     return weatherIconsMap[condition];
 }
 
-/*
-export const renderForecast = (forecast) => {
-    const dailyBtn = document.getElementById('dailyBtn');
-    const forecastContainer = document.getElementById('forecastDisplay');
-
-    forecastContainer.innerHTML = '';
-
-    if(dailyBtn.classList.contains('active')){
-
-        for(let i=0; i<=6; i++){
-
-            createWeeeklyCard(i, forecast, forecastContainer);
-
-        }
-
-
-    }else{
-        console.log('nein') 
-    }
-}*/
-
 export const extractForecastHours = (externalData) => {
     if(!externalData) {
         return
@@ -107,7 +83,6 @@ export const extractForecastHours = (externalData) => {
         usableData = externalData.days[0].hours.slice(currentTime, lastHour);
     }
 
-    console.log(currentTime);
     return usableData;
 }
 
