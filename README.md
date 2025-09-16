@@ -34,6 +34,7 @@ A clean, interactive, and dynamic weather application built to practice JavaScri
 ```bash
 git clone https://github.com/RbsDeveloper/Odin-Project-Weather-app.git
 cd Odin-Project-Weather-app
+```
 
 ## 📝 Usage Guide
 
@@ -72,7 +73,7 @@ git commit -m "Add feature description"
 git push origin feature-name
 
 # Submit a Pull Request on GitHub
-
+```
 ## 📄 License
 
 MIT License – Feel free to use, modify, and distribute this project for personal or commercial use.
