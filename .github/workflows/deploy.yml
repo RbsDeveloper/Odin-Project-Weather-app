@@ -5,6 +5,9 @@ on:
     branches:
       - main  # run this when pushing to main
 
+permissions:
+  contents: write
+
 jobs:
   build:
     runs-on: ubuntu-latest
