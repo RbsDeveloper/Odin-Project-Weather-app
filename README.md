@@ -2,6 +2,7 @@
 
 A clean, interactive, and dynamic weather application built to practice JavaScript, DOM manipulation, and API integration. This project fetches weather data from Visual Crossing API and presents it in a user-friendly interface.
 
+**Live Demo**: [WeatherApp on GitHub Pages](https://rbsdeveloper.github.io/Odin-Project-Weather-app/)
 ---
 
 ## 🚀 Features
